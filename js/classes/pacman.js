@@ -44,7 +44,7 @@ export class Pacman extends gameObject {
       this.coordYPixels = temp;
     }
 
-  } //End moveUp
+  }
 
   moveDown(){
     let temp = this.coordYPixels+this.speedPacman;
@@ -56,7 +56,7 @@ export class Pacman extends gameObject {
       this.directionPacman = 4;
       this.coordYPixels = temp;
     }
-  } //End moveDown
+  }
 
   moveLeft(){
     let temp = this.coordXPixels-this.speedPacman;
@@ -77,15 +77,14 @@ export class Pacman extends gameObject {
 
     if (distancia < IMAGE_SIZE) {
       //mHE FOTUT nata amb una roca
-      alert("Has xocat amb una roca, has perdut una vida");
+      alert("Has xocat amb una roca, tornes a la posició inicial");
       // Restar una vida
-      this.pacmanlives--;
       // Tornar a posar pacman al punt de partida
       this.spawnPacman();
-      if (this.pacmanlives === 0){
-        alert("Has perdut totes les vides, GAME OVER");
-        noLoop();
-      }
+      // if (this.pacmanlives === 0){
+      //   alert("Has perdut totes les vides, GAME OVER");
+      //   noLoop();
+      // }
 
       } //End switch
     }
@@ -133,6 +132,21 @@ testCollideFood(food) {
     return false;
   }
 }
+
+testCollideZombie(zombie){
+  let distancia = dist(this.coordXPixels,
+    this.coordYPixels, zombie.coordXPixels, zombie.coordYPixels);
+  // console.log( "Distancia entre pacman i roca: " + distancia);
+
+  if (distancia < IMAGE_SIZE) {
+    console.log("Has xocat amb un zombie");
+    return true;
+  } else {
+    console.log("Zombie massa lluny");
+    return false;
+  }
+}
+
 
 testCollidePowerup(powerup){
     let distancia = dist(this.coordXPixels,
